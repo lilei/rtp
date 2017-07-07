@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-/*
+/*RtpHeader the struct of the RTP header
  0               1               2               3              4
  0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -28,7 +28,7 @@ import (
 
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 */
-//RtpHeader the struct of the RTP header
+
 type Header struct {
 	Version     uint8
 	Padding     uint8
@@ -46,11 +46,7 @@ type Header struct {
 func ParseRtpHeader(buf []byte) *Header {
 	len := len(buf)
 	if len < 12 {
-		log.Println("parse rtp header failed")
-		return nil
-	}
-	if len%4 != 0 {
-		log.Printf("error,illegal header's len  %d", len)
+		log.Println("parse rtp header failed,len %d is less than 12\n", len)
 		return nil
 	}
 	header := Header{}
