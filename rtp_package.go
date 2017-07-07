@@ -60,7 +60,7 @@ func ParseRtpHeader(buf []byte) *Header {
 	header.Extension = (buf[0] & 0x10) >> 4
 	header.Cc = buf[0] & 0x0f
 	header.Marker = (buf[1] & 0x8f) >> 7
-	header.Padding = buf[1] & 0x7f
+	header.PayloadType = buf[1] & 0x7f
 	header.Sequence = binary.BigEndian.Uint16(buf[2:])
 	header.TimeStamp = binary.BigEndian.Uint32(buf[4:])
 	header.SSRC = binary.BigEndian.Uint32(buf[8:])

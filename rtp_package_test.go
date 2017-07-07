@@ -1,7 +1,6 @@
 package RTP
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -33,13 +32,31 @@ func TestParseRtpHeader(t *testing.T) {
 
 	head := ParseRtpHeader(buf)
 
-	fmt.Printf("      version:      %d\n", head.Version)
-	fmt.Printf("      padding:      %d\n", head.Padding)
-	fmt.Printf("     extision:      %d\n", head.Extension)
-	fmt.Printf("           cc:      %d\n", head.Cc)
-	fmt.Printf("       marker:      %d\n", head.Marker)
-	fmt.Printf("           pt:      %d\n", head.PayloadType)
-	fmt.Printf("      sequene:      %d\n", head.Sequence)
-	fmt.Printf("    timestamp:      %d\n", head.TimeStamp)
-	fmt.Printf("         SSRC:      %d\n", head.SSRC)
+	if head.Version != 2 {
+		t.Error("parse RTP Header error:Version")
+	}
+	if head.Padding != 0 {
+		t.Error("parse RTP Header error:padding")
+	}
+	if head.Extension != 0 {
+		t.Error("parse RTP Header error:extension")
+	}
+	if head.Cc != 0 {
+		t.Error("parse RTP Header error:cc")
+	}
+	if head.Marker != 1 {
+		t.Error("parse RTP Header error:marker")
+	}
+	if head.PayloadType != 9 {
+		t.Error("parse RTP Header error:pt")
+	}
+	if head.Sequence != 3056 {
+		t.Error("parse RTP Header error:sequence")
+	}
+	if head.TimeStamp != 1314074351 {
+		t.Error("parse RTP Header error:timestamp")
+	}
+	if head.SSRC != 2044467643 {
+		t.Error("parse RTP Header error:ssrc")
+	}
 }
